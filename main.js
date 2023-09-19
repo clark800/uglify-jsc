@@ -7,7 +7,7 @@ if (typeof arguments !== 'undefined') {
         var result = minify(input);
         if (result.error) {
             print();
-            throw new Error(result.error);
+            throw result.error;
         }
         print(result.code);
     }
