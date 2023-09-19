@@ -1,0 +1,20 @@
+#!/bin/sh
+
+if [ ! -e UglifyJS ]; then
+    git clone https://github.com/mishoo/UglifyJS
+fi
+
+cd UglifyJS/lib
+
+cat utils.js \
+    ast.js \
+    transform.js \
+    parse.js \
+    scope.js \
+    compress.js \
+    output.js \
+    sourcemap.js \
+    mozilla-ast.js \
+    propmangle.js \
+    minify.js \
+    ../../main.js > ../../uglify.js

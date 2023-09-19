@@ -1,0 +1,7 @@
+#!/bin/sh
+
+mkdir -p /usr/local/bin
+mkdir -p /usr/local/lib/jsc
+
+cp uglify.js /usr/local/lib/jsc/
+cp uglify /usr/local/bin/
