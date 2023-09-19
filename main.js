@@ -2,13 +2,11 @@
 var exports = {};
 
 if (typeof arguments !== 'undefined') {
-    for (var i = 0; i < arguments.length; i++) {
-        var input = readFile(arguments[i]);
-        var result = minify(input);
-        if (result.error) {
-            print();
-            throw result.error;
-        }
-        print(result.code);
-    }
+    var input = '';
+    for (var i = 0; i < arguments.length; i++)
+        input += readFile(arguments[i]) + '\n';
+    var result = minify(input, {toplevel: true});
+    if (result.error)
+        throw new Error(result.error.message);
+    print(result.code);
 }
