@@ -5,3 +5,14 @@ mkdir -p /usr/local/lib/jsc
 
 cp uglify.js /usr/local/lib/jsc/
 cp uglify /usr/local/bin/
+
+if ! command -v jsc > /dev/null; then
+    root="/System/Library/Frameworks/JavaScriptCore.framework/"
+    path="$(find "$root" -name jsc)"
+    if [ -x "$path" ]; then
+        ln -s "$path" /usr/local/bin/jsc
+    else
+        echo "Error: could not find 'jsc' executable"
+        exit 1
+    fi
+fi
