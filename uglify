@@ -1,3 +1,0 @@
-#!/bin/sh
-
-jsc /usr/local/lib/jsc/uglify.js -- "$@"

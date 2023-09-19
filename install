@@ -1,16 +1,21 @@
 #!/bin/sh
 
-mkdir -p /usr/local/bin
-mkdir -p /usr/local/lib/jsc
+PREFIX="${PREFIX:-/usr/local}"
 
-cp uglify.js /usr/local/lib/jsc/
-cp uglify /usr/local/bin/
+mkdir -p "$PREFIX/bin"
+mkdir -p "$PREFIX/lib/jsc"
+
+cp uglify.js "$PREFIX/lib/jsc/"
+
+printf '#!/bin/sh\n\njsc %s/lib/jsc/uglify.js -- "$@"' "$PREFIX" > uglify
+chmod +x uglify
+mv uglify "$PREFIX/bin/"
 
 if ! command -v jsc > /dev/null; then
     root="/System/Library/Frameworks/JavaScriptCore.framework/"
     path="$(find "$root" -name jsc)"
     if [ -x "$path" ]; then
-        ln -s "$path" /usr/local/bin/jsc
+        ln -s "$path" "$PREFIX/bin/jsc"
     else
         echo "Error: could not find 'jsc' executable"
         exit 1
